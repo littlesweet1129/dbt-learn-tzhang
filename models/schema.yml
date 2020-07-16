@@ -46,3 +46,12 @@ models:
         description: related order id
         tests:
           - not_null
+  
+  - name: orders
+    description: One row per order id with order amount
+    columns:
+      - name: order_id
+        description: Primary Key
+        tests:
+          - unique
+          - not_null

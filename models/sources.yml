@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: raw
+    tables:
+      - name: orders
+        description: original jaffle shop order, one row per order
+        loaded_at_field: _etl_loaded_at
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}
+
+      - name: customers
+        description: orignal jaffle shop customer data with cutomer name only, one row per customer
+
+  - name: stripe
+    database: raw
+    loaded_at_field: _batched_at
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+
+    tables:
+      - name: payment
+        description: original stripe payment table, one row per transaction 
